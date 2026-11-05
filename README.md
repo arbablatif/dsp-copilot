@@ -75,7 +75,7 @@ Also run:
 - **Mock mode:** 6 of 6, with 0 API calls. This covers the tools and the agent loop, but the planning is done by keyword rules, so it says nothing about model quality.
 - **Test suite:** 46 tests pass. They cover DSP accuracy, input validation, error recovery, the step limit, caching, and the Streamlit app in mock mode.
 
-Full output, including each answer, is in [results/eval_live.md](results/eval_live.md) and [results/eval_live.json](results/eval_live.json).
+A summary table is in [results/eval_live.md](results/eval_live.md). Each answer and tool call is in [results/eval_live.json](results/eval_live.json).
 
 ### What reading the answers found
 
@@ -88,7 +88,7 @@ The first live run also scored 6 of 6, yet two answers were wrong. The checks lo
 | Valid `max_freq_hz=250` rejected | A sample rate derived from a CSV time column carried floating-point error (Nyquist 249.99999999999977) | The derived rate is now rounded |
 | Claimed −568 dB of attenuation | A rounding artifact of the notch's theoretical null | Depths beyond −120 dB are reported as "below -120" |
 
-In all but one case, the model was accurately repeating what a tool told it, so the fixes went into the tools. The lesson for this kind of system: passing checks on the output doesn't validate the explanation.
+All four traced back to how our tools reported results or handled input, so the fixes went there, not into the prompt. The lesson for this kind of system: passing checks on the output doesn't validate the explanation.
 
 ## How to run
 
