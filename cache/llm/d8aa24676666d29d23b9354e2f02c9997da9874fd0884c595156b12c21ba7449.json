@@ -1,0 +1,6 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "text": "To detect the R-peaks and estimate the heart rate, a 4th-order Butterworth band-pass filter (5 to 30 Hz) was applied using zero-phase filtering (giving an applied gain of -6.02 dB at the cutoffs) to remove baseline wander and the 50 Hz mains hum. \n\nPeak detection on the filtered signal (`ecg_50hz_hum_filtered`) with a minimum distance of 0.3 seconds successfully identified 24 R-peaks. The estimated heart rate is 72 beats per minute, with a mean R-R interval of 0.8333 seconds and an interval standard deviation of 0.001 seconds.",
+  "tool_calls": []
+}

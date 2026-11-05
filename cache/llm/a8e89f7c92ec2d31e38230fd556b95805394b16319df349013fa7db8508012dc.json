@@ -1,0 +1,6 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "text": "The Signal-to-Noise Ratio (SNR) of the noisy tone (`tone_noisy`) compared against the clean reference (`tone_clean`) is 10 dB.",
+  "tool_calls": []
+}

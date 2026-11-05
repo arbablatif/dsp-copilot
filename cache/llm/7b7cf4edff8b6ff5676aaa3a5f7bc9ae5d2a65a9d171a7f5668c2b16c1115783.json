@@ -1,0 +1,15 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "text": "",
+  "tool_calls": [
+    {
+      "id": "call_1",
+      "name": "compute_spectrogram",
+      "args": {
+        "signal": "chirp_noisy"
+      },
+      "signature": "EmAKXgFpFH0TS2IMtnJotYaDXRqojr/LJV9YYmQW2xvBtSy5WXBvZ1n/eHuG6SHVB7r8HEsJYAfj0wfu5ziFC+QCdklHwA+b7hao41KsJNvHVKr+Mq8Yu8kSa4eilzVEVqs="
+    }
+  ]
+}

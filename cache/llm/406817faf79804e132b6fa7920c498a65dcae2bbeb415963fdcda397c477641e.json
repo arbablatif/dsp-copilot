@@ -1,0 +1,16 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "text": "",
+  "tool_calls": [
+    {
+      "id": "call_1",
+      "name": "apply_filter",
+      "args": {
+        "filter_id": "filter_1",
+        "signal": "three_tones"
+      },
+      "signature": "EmAKXgFpFH0TCa8Gubsqp59AU6qKecx5E3zfW0QXQqLe/qLYApWng0TfUa6BwO5a8wDmfZ58MjSTeAHEUdsDTc5UnYUXtAxkKE0V5KBSVvWFibz4XCptpFCI6wG+fUGhy4g="
+    }
+  ]
+}

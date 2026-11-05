@@ -1,0 +1,17 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "text": "",
+  "tool_calls": [
+    {
+      "id": "call_1",
+      "name": "detect_peaks",
+      "args": {
+        "domain": "time",
+        "signal": "ecg_filtered",
+        "min_distance_s": 0.3
+      },
+      "signature": "EmAKXgFpFH0TFeXue6RQ0To67GVnIXXCRW0HCzTqybdhO+yd+aQtKazEiCMth3htRHan6Jpbn6Pn8yJulRE5arhf+x97BmSZMGTtmfBhPNJ61be/RYi6ymH8oFYFP4nY+ok="
+    }
+  ]
+}

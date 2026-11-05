@@ -1,0 +1,17 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "text": "",
+  "tool_calls": [
+    {
+      "id": "call_1",
+      "name": "compute_fft",
+      "args": {
+        "max_freq_hz": 3000,
+        "n_peaks": 5,
+        "signal": "three_tones"
+      },
+      "signature": "EmAKXgFpFH0TotHw7NdMa47wjMaw6/7+b34wnRBLmoDarkMKqDepWc7P/ngUwuEm0cIarsRyM4Zk2QEvo/jG0BRCV9wS4ZIBKBnOFM2AL78EgZXDqpdSFQM1qUpcG15Ckow="
+    }
+  ]
+}

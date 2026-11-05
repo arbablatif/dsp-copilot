@@ -1,0 +1,21 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "text": "",
+  "tool_calls": [
+    {
+      "id": "call_1",
+      "name": "compute_fft",
+      "args": {
+        "probe_freqs_hz": [
+          50
+        ],
+        "n_peaks": 5,
+        "compare_with": "ecg_50hz_hum",
+        "signal": "ecg_filtered",
+        "max_freq_hz": 249
+      },
+      "signature": "EmAKXgFpFH0TgHx5bEarL7OJaJs04jzYj1MpW3pgVGKTpCTPRQemwAYB6RzaKCx+jzY2Wbim5E7d3roX3lsMHYzT3xFgOQamPByWlUPukBsWCJeccuSgKurCJiSp6klills="
+    }
+  ]
+}

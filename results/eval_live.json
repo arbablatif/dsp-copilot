@@ -1,0 +1,226 @@
+{
+  "label": "gemini / gemini-3.5-flash-lite",
+  "mode": "live",
+  "passed": 6,
+  "total": 6,
+  "cases": [
+    {
+      "name": "hum_removal",
+      "request": "Remove the 50 Hz hum and show the spectrum",
+      "passed": true,
+      "detail": "50 Hz changed -54.0 dB (need <= -20), 10 Hz changed -0.00 dB, spectrum shown: True",
+      "tools": [
+        "design_filter",
+        "apply_filter",
+        "compute_fft"
+      ],
+      "tool_errors": [],
+      "llm_turns": 4,
+      "api_calls": 0,
+      "finished": true,
+      "tool_calls": [
+        {
+          "name": "design_filter",
+          "args": {
+            "method": "notch",
+            "cutoff_hz": [
+              50
+            ],
+            "q": 30,
+            "response": "notch",
+            "signal": "ecg_50hz_hum"
+          }
+        },
+        {
+          "name": "apply_filter",
+          "args": {
+            "zero_phase": true,
+            "filter_id": "filter_1",
+            "signal": "ecg_50hz_hum"
+          }
+        },
+        {
+          "name": "compute_fft",
+          "args": {
+            "signal": "ecg_50hz_hum_filtered",
+            "probe_freqs_hz": [
+              50
+            ],
+            "compare_with": "ecg_50hz_hum"
+          }
+        }
+      ],
+      "answer": "I applied a zero-phase notch filter centered at 50 Hz with a Q-factor of 30 to remove the mains hum from the ECG signal. The zero-phase filtering achieved two passes, providing an attenuation of below -120 dB at the cutoff. Comparing the spectra before and after filtering via FFT, the probe at 50 Hz showed the level dropped from -12 dB to -104 dB (a difference of -92 dB), successfully eliminating the 50 Hz interference while preserving the underlying ECG signal characteristics and reducing the RMS from 0.293 to 0.2336."
+    },
+    {
+      "name": "dominant_tones",
+      "request": "What are the dominant frequencies in this signal?",
+      "passed": true,
+      "detail": "tones found: {440.0: True, 1000.0: True, 3000.0: True}, answer mentions 440: True",
+      "tools": [
+        "compute_fft"
+      ],
+      "tool_errors": [],
+      "llm_turns": 2,
+      "api_calls": 0,
+      "finished": true,
+      "tool_calls": [
+        {
+          "name": "compute_fft",
+          "args": {
+            "signal": "three_tones"
+          }
+        }
+      ],
+      "answer": "The dominant frequencies in the `three_tones` signal are 440 Hz, 1000 Hz, and 3000 Hz, each having an amplitude of approximately 0.20 (or a level of -14 dB)."
+    },
+    {
+      "name": "spectrogram",
+      "request": "Show me a spectrogram of the chirp",
+      "passed": true,
+      "detail": "sweep measured 125.0 -> 3968.8 Hz, truth 100 -> 4000 Hz (+/-100)",
+      "tools": [
+        "compute_spectrogram"
+      ],
+      "tool_errors": [],
+      "llm_turns": 2,
+      "api_calls": 0,
+      "finished": true,
+      "tool_calls": [
+        {
+          "name": "compute_spectrogram",
+          "args": {
+            "signal": "chirp_noisy"
+          }
+        }
+      ],
+      "answer": "I have computed and displayed the spectrogram for the `chirp_noisy` signal. \n\nThe spectrogram parameters used were a segment size (`nperseg`) of 512 samples, yielding a time resolution of 0.032 seconds and a frequency resolution of 31.25 Hz. The resulting spectrogram shows the frequency content changing over time, with the dominant frequency sweeping from an initial start of 125 Hz up to an end of 3968.8 Hz over the course of the 4-second duration."
+    },
+    {
+      "name": "lowpass",
+      "request": "Low-pass at 1 kHz with a 4th-order Butterworth and compare before and after",
+      "passed": true,
+      "detail": "3 kHz changed -84.2 dB (need <= -30), 440 Hz changed -0.01 dB, design butterworth order 4 at [1000.0] Hz, answer states the applied cutoff gain: True",
+      "tools": [
+        "design_filter",
+        "apply_filter",
+        "compute_fft"
+      ],
+      "tool_errors": [],
+      "llm_turns": 4,
+      "api_calls": 0,
+      "finished": true,
+      "tool_calls": [
+        {
+          "name": "design_filter",
+          "args": {
+            "response": "lowpass",
+            "order": 4,
+            "cutoff_hz": [
+              1000
+            ],
+            "signal": "three_tones",
+            "method": "butterworth"
+          }
+        },
+        {
+          "name": "apply_filter",
+          "args": {
+            "signal": "three_tones",
+            "filter_id": "filter_1",
+            "zero_phase": true
+          }
+        },
+        {
+          "name": "compute_fft",
+          "args": {
+            "compare_with": "three_tones",
+            "probe_freqs_hz": [
+              1000
+            ],
+            "signal": "three_tones_filtered"
+          }
+        }
+      ],
+      "answer": "I applied a 4th-order Butterworth low-pass filter with a 1 kHz cutoff to the `three_tones` signal using zero-phase filtering. \n\nThe filter attenuated the signal by approximately -6.02 dB at the 1 kHz cutoff frequency (double the single-pass -3.01 dB design attenuation due to forward-backward filtering). The FFT comparison confirmed that tones at or below 1 kHz (such as 440 Hz) passed through unattenuated, while frequencies above the cutoff (such as the 3 kHz tone) were removed. Consequently, the signal's RMS decreased from 0.2457 to 0.158."
+    },
+    {
+      "name": "snr",
+      "request": "What is the SNR of the noisy tone?",
+      "passed": true,
+      "detail": "SNR 10.0 dB by reference method, truth 10.002 dB (+/-1)",
+      "tools": [
+        "compute_snr"
+      ],
+      "tool_errors": [],
+      "llm_turns": 2,
+      "api_calls": 0,
+      "finished": true,
+      "tool_calls": [
+        {
+          "name": "compute_snr",
+          "args": {
+            "signal": "tone_noisy",
+            "reference_signal": "tone_clean",
+            "method": "reference"
+          }
+        }
+      ],
+      "answer": "The Signal-to-Noise Ratio (SNR) of the noisy tone (`tone_noisy`) compared against the clean reference (`tone_clean`) is 10 dB."
+    },
+    {
+      "name": "heart_rate",
+      "request": "Detect the R-peaks and estimate the heart rate",
+      "passed": true,
+      "detail": "72.0 bpm from 24 peaks, truth 72 bpm (+/-3)",
+      "tools": [
+        "compute_fft",
+        "design_filter",
+        "apply_filter",
+        "detect_peaks"
+      ],
+      "tool_errors": [],
+      "llm_turns": 5,
+      "api_calls": 0,
+      "finished": true,
+      "tool_calls": [
+        {
+          "name": "compute_fft",
+          "args": {
+            "signal": "ecg_50hz_hum"
+          }
+        },
+        {
+          "name": "design_filter",
+          "args": {
+            "method": "butterworth",
+            "response": "bandpass",
+            "order": 4,
+            "signal": "ecg_50hz_hum",
+            "cutoff_hz": [
+              5,
+              30
+            ]
+          }
+        },
+        {
+          "name": "apply_filter",
+          "args": {
+            "filter_id": "filter_1",
+            "signal": "ecg_50hz_hum",
+            "zero_phase": true
+          }
+        },
+        {
+          "name": "detect_peaks",
+          "args": {
+            "min_distance_s": 0.3,
+            "signal": "ecg_50hz_hum_filtered",
+            "domain": "time"
+          }
+        }
+      ],
+      "answer": "To detect the R-peaks and estimate the heart rate, a 4th-order Butterworth band-pass filter (5 to 30 Hz) was applied using zero-phase filtering (giving an applied gain of -6.02 dB at the cutoffs) to remove baseline wander and the 50 Hz mains hum. \n\nPeak detection on the filtered signal (`ecg_50hz_hum_filtered`) with a minimum distance of 0.3 seconds successfully identified 24 R-peaks. The estimated heart rate is 72 beats per minute, with a mean R-R interval of 0.8333 seconds and an interval standard deviation of 0.001 seconds."
+    }
+  ]
+}

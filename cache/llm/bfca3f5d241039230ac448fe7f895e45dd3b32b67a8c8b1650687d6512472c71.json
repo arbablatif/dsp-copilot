@@ -1,0 +1,21 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "text": "",
+  "tool_calls": [
+    {
+      "id": "call_1",
+      "name": "design_filter",
+      "args": {
+        "signal": "ecg_50hz_hum",
+        "cutoff_hz": [
+          50
+        ],
+        "method": "notch",
+        "response": "notch",
+        "q": 30
+      },
+      "signature": "EmAKXgFpFH0TK3DP2wjmr6pXMGm8khg2pbRlTyVl3NkcXRcUFct0D6VP49xM3PNQjxkR46svKPw4kcrAKKKFKe899dsM3uYGF91yTxa6rGWMM8uQytpAq8KM/+q6CBHk+hQ="
+    }
+  ]
+}

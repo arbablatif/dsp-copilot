@@ -1,0 +1,6 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "text": "The dominant frequencies in the `three_tones` signal are 440 Hz, 1000 Hz, and 3000 Hz, each having an amplitude of approximately 0.20 (or a level of -14 dB).",
+  "tool_calls": []
+}

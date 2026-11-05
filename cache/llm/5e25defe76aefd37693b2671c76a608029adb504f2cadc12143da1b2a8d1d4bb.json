@@ -1,0 +1,6 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "text": "I have generated the spectrogram for the `chirp_noisy` signal using a 512-sample window size. The frequency resolution is 31.25 Hz with a time resolution of 0.032 seconds. The spectrogram shows the frequency content sweeping over time, with the dominant frequency starting at 312.5 Hz and ending at 3812.5 Hz.",
+  "tool_calls": []
+}

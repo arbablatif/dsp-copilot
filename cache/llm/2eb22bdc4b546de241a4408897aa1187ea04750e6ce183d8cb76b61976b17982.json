@@ -1,0 +1,18 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "text": "",
+  "tool_calls": [
+    {
+      "id": "call_1",
+      "name": "apply_filter",
+      "args": {
+        "filter_id": "filter_1",
+        "output_name": "ecg_filtered",
+        "signal": "ecg_50hz_hum",
+        "zero_phase": true
+      },
+      "signature": "EmAKXgFpFH0TzUWVYQN+l+iBiliLJtxsUoDRC2dlmN2r5EXTrNNvT1CHnPxWzBflrG0LU9QTgqy0coS9uLNLsL4T9OVzh+SMIr723YzZX8oOOFqFD+w255zB6Q1V0NVJCtE="
+    }
+  ]
+}

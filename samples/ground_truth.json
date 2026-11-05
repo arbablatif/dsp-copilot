@@ -1,0 +1,32 @@
+{
+  "ecg_50hz_hum": {
+    "fs": 500,
+    "bpm": 72,
+    "hum_hz": 50.0,
+    "beats": 24
+  },
+  "three_tones": {
+    "fs": 16000,
+    "tones_hz": [
+      440.0,
+      1000.0,
+      3000.0
+    ]
+  },
+  "chirp_noisy": {
+    "fs": 16000,
+    "f_start_hz": 100,
+    "f_end_hz": 4000
+  },
+  "vibration": {
+    "fs": 5000,
+    "shaft_hz": 29.5,
+    "fault_rate_hz": 107.0,
+    "resonance_hz": 1800.0
+  },
+  "tone_noisy": {
+    "fs": 16000,
+    "tone_hz": 1000.0,
+    "snr_db": 10.002
+  }
+}

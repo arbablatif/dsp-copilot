@@ -1,0 +1,17 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "text": "",
+  "tool_calls": [
+    {
+      "id": "call_1",
+      "name": "compute_snr",
+      "args": {
+        "signal": "tone_noisy",
+        "reference_signal": "tone_clean",
+        "method": "reference"
+      },
+      "signature": "EmAKXgFpFH0TM9jlZGqCyY3pnnRcp4MIIp+gtyuM+8otmp8NqdAQPn7eMJq7bLdp1y9HmQS3posIMy1Nkj9hGJGcUraIdDXvJAze6cu4oN6efhxLe8Ue215eI4BKT2TzLXs="
+    }
+  ]
+}

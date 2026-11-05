@@ -1,0 +1,6 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "text": "To detect the R-peaks and estimate the heart rate, I first designed a 4th-order Butterworth bandpass filter with cutoff frequencies at 5 Hz and 30 Hz to isolate the QRS complexes while removing baseline wander and the 50 Hz power-line interference. Applying this zero-phase filter produced a cleaner signal (`ecg_filtered`) with an RMS of 0.1401. \n\nUsing time-domain peak detection with a minimum peak distance of 0.3 seconds, I detected 24 R-peaks over the 20-second duration. The mean peak interval was 0.8333 seconds with a standard deviation of 0.001 seconds, resulting in an estimated heart rate of 72 beats per minute.",
+  "tool_calls": []
+}

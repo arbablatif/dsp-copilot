@@ -1,0 +1,22 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "text": "",
+  "tool_calls": [
+    {
+      "id": "call_1",
+      "name": "design_filter",
+      "args": {
+        "method": "butterworth",
+        "response": "bandpass",
+        "order": 4,
+        "signal": "ecg_50hz_hum",
+        "cutoff_hz": [
+          5,
+          30
+        ]
+      },
+      "signature": "EmAKXgFpFH0TFUp2fEVJefYV/BxoF6C3lzrYavqHMgcVR/om3KDoMkLTDlKYrPEnnIbNObHzlHSdyvAGk5B+BJwmf8JQj0T4veL8F7cqTS0NFqqi4KcBDJnbpZ939J4j1VU="
+    }
+  ]
+}

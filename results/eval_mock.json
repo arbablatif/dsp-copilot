@@ -1,0 +1,215 @@
+{
+  "label": "mock / mock",
+  "mode": "mock",
+  "passed": 6,
+  "total": 6,
+  "cases": [
+    {
+      "name": "hum_removal",
+      "request": "Remove the 50 Hz hum and show the spectrum",
+      "passed": true,
+      "detail": "50 Hz changed -54.0 dB (need <= -20), 10 Hz changed -0.00 dB, spectrum shown: True",
+      "tools": [
+        "design_filter",
+        "apply_filter",
+        "compute_fft"
+      ],
+      "tool_errors": [],
+      "llm_turns": 4,
+      "api_calls": 0,
+      "finished": true,
+      "tool_calls": [
+        {
+          "name": "design_filter",
+          "args": {
+            "signal": "ecg_50hz_hum",
+            "method": "notch",
+            "response": "notch",
+            "cutoff_hz": [
+              50.0
+            ]
+          }
+        },
+        {
+          "name": "apply_filter",
+          "args": {
+            "signal": "ecg_50hz_hum",
+            "filter_id": "filter_1"
+          }
+        },
+        {
+          "name": "compute_fft",
+          "args": {
+            "signal": "ecg_50hz_hum_filtered",
+            "compare_with": "ecg_50hz_hum",
+            "probe_freqs_hz": [
+              50.0
+            ]
+          }
+        }
+      ],
+      "answer": "(Mock mode: tools were chosen by keyword rules, not an LLM.)\n- Designed a notch notch filter at [50.0] Hz.\n- Applied it, creating ecg_50hz_hum_filtered (RMS 0.293 to 0.2336). Gain at the cutoff: below -120 dB.\n- Strongest spectral peaks: 0.3 Hz, 4.8 Hz, 3.6 Hz, 10.8 Hz, 9.6 Hz.\n- Level at 50 Hz changed by -92.0 dB."
+    },
+    {
+      "name": "dominant_tones",
+      "request": "What are the dominant frequencies in this signal?",
+      "passed": true,
+      "detail": "tones found: {440.0: True, 1000.0: True, 3000.0: True}, answer mentions 440: True",
+      "tools": [
+        "compute_fft"
+      ],
+      "tool_errors": [],
+      "llm_turns": 2,
+      "api_calls": 0,
+      "finished": true,
+      "tool_calls": [
+        {
+          "name": "compute_fft",
+          "args": {
+            "signal": "three_tones"
+          }
+        }
+      ],
+      "answer": "(Mock mode: tools were chosen by keyword rules, not an LLM.)\n- Strongest spectral peaks: 440 Hz, 3000 Hz, 1000 Hz."
+    },
+    {
+      "name": "spectrogram",
+      "request": "Show me a spectrogram of the chirp",
+      "passed": true,
+      "detail": "sweep measured 125.0 -> 3968.8 Hz, truth 100 -> 4000 Hz (+/-100)",
+      "tools": [
+        "compute_spectrogram"
+      ],
+      "tool_errors": [],
+      "llm_turns": 2,
+      "api_calls": 0,
+      "finished": true,
+      "tool_calls": [
+        {
+          "name": "compute_spectrogram",
+          "args": {
+            "signal": "chirp_noisy"
+          }
+        }
+      ],
+      "answer": "(Mock mode: tools were chosen by keyword rules, not an LLM.)\n- Spectrogram: dominant frequency moves from about 125.0 Hz to 3968.8 Hz."
+    },
+    {
+      "name": "lowpass",
+      "request": "Low-pass at 1 kHz with a 4th-order Butterworth and compare before and after",
+      "passed": true,
+      "detail": "3 kHz changed -84.2 dB (need <= -30), 440 Hz changed -0.01 dB, design butterworth order 4 at [1000.0] Hz, answer states the applied cutoff gain: True",
+      "tools": [
+        "design_filter",
+        "apply_filter",
+        "compute_fft"
+      ],
+      "tool_errors": [],
+      "llm_turns": 4,
+      "api_calls": 0,
+      "finished": true,
+      "tool_calls": [
+        {
+          "name": "design_filter",
+          "args": {
+            "signal": "three_tones",
+            "method": "butterworth",
+            "response": "lowpass",
+            "cutoff_hz": [
+              1000.0
+            ],
+            "order": 4
+          }
+        },
+        {
+          "name": "apply_filter",
+          "args": {
+            "signal": "three_tones",
+            "filter_id": "filter_1"
+          }
+        },
+        {
+          "name": "compute_fft",
+          "args": {
+            "signal": "three_tones_filtered",
+            "compare_with": "three_tones",
+            "probe_freqs_hz": [
+              1000.0
+            ]
+          }
+        }
+      ],
+      "answer": "(Mock mode: tools were chosen by keyword rules, not an LLM.)\n- Designed a butterworth lowpass filter at [1000.0] Hz.\n- Applied it, creating three_tones_filtered (RMS 0.2457 to 0.158). Gain at the cutoff: -6.02 dB.\n- Strongest spectral peaks: 440 Hz, 1000 Hz, 114.21 Hz, 159.19 Hz, 595.27 Hz.\n- Level at 1000 Hz changed by -6.0 dB."
+    },
+    {
+      "name": "snr",
+      "request": "What is the SNR of the noisy tone?",
+      "passed": true,
+      "detail": "SNR 10.0 dB by reference method, truth 10.002 dB (+/-1)",
+      "tools": [
+        "compute_snr"
+      ],
+      "tool_errors": [],
+      "llm_turns": 2,
+      "api_calls": 0,
+      "finished": true,
+      "tool_calls": [
+        {
+          "name": "compute_snr",
+          "args": {
+            "signal": "tone_noisy",
+            "method": "reference",
+            "reference_signal": "tone_clean"
+          }
+        }
+      ],
+      "answer": "(Mock mode: tools were chosen by keyword rules, not an LLM.)\n- SNR is 10.0 dB (reference method)."
+    },
+    {
+      "name": "heart_rate",
+      "request": "Detect the R-peaks and estimate the heart rate",
+      "passed": true,
+      "detail": "72.0 bpm from 24 peaks, truth 72 bpm (+/-3)",
+      "tools": [
+        "design_filter",
+        "apply_filter",
+        "detect_peaks"
+      ],
+      "tool_errors": [],
+      "llm_turns": 4,
+      "api_calls": 0,
+      "finished": true,
+      "tool_calls": [
+        {
+          "name": "design_filter",
+          "args": {
+            "signal": "ecg_50hz_hum",
+            "method": "butterworth",
+            "response": "bandpass",
+            "cutoff_hz": [
+              5.0,
+              30.0
+            ],
+            "order": 2
+          }
+        },
+        {
+          "name": "apply_filter",
+          "args": {
+            "signal": "ecg_50hz_hum",
+            "filter_id": "filter_1"
+          }
+        },
+        {
+          "name": "detect_peaks",
+          "args": {
+            "signal": "ecg_50hz_hum_filtered",
+            "domain": "time",
+            "min_distance_s": 0.3
+          }
+        }
+      ],
+      "answer": "(Mock mode: tools were chosen by keyword rules, not an LLM.)\n- Designed a butterworth bandpass filter at [5.0, 30.0] Hz.\n- Applied it, creating ecg_50hz_hum_filtered (RMS 0.293 to 0.138). Gain at the cutoff: -6.02 dB.\n- Found 24 peaks, a rate of 72.0 per minute."
+    }
+  ]
+}
