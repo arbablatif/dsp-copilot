@@ -9,3 +9,7 @@ __pycache__/
 
 # Runtime output (regenerated)
 out/
+
+# Local workspace files, not part of the project
+CLAUDE.md
+.vscode/

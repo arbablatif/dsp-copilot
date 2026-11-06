@@ -1,6 +1,6 @@
-# DSP Copilot
+# DSP Copilot: LLM Agent for Signal Processing on CSV and WAV Files
 
-An LLM agent that does signal processing on your CSV or WAV files. Ask in plain English, for example *"remove the 50 Hz hum and show the spectrum"*. The agent chooses the tools, runs them, plots the results and explains what it did. Every tool call is shown, so the work can be checked.
+An LLM agent that does digital signal processing (DSP) on your CSV or WAV files: FFT, spectrograms, FIR and IIR filters, peak detection and SNR. Ask in plain English, for example *"remove the 50 Hz hum and show the spectrum"*. The agent chooses the tools, runs them, plots the results and explains what it did. Every tool call is shown, so the work can be checked.
 
 ![Spectrum before and after removing 50 Hz hum](results/figures/live/hum_removal/03_fft_ecg_50hz_hum_filtered.png)
 
@@ -129,3 +129,15 @@ Every model reply is cached in `cache/llm/`, so repeating a conversation costs n
 - **Filter edge effects.** A Q=30 notch rings for about 0.2 s at 50 Hz, visible at the start of the filtered ECG. Discard the edges of short recordings.
 - **Input assumptions.** CSV data is assumed to be evenly sampled (the rate comes from the median spacing). Stereo WAV is mixed to mono. Files are limited to 5 million samples.
 - **Not a medical device.** The ECG here is synthetic and the heart-rate tool is a demonstration. It must not be used for clinical purposes.
+
+## License
+
+The code is MIT licensed. See [LICENSE](LICENSE).
+
+## Related projects
+
+- [predictive-maintenance-agent](https://github.com/arbablatif/predictive-maintenance-agent): bearing fault diagnosis, RUL prediction and verified tickets
+- [contactless-vitals](https://github.com/arbablatif/contactless-vitals): camera-based pulse waveform extraction with rPPG
+- [matlab-to-python-agent](https://github.com/arbablatif/matlab-to-python-agent): LLM code conversion checked against real MATLAB output
+
+Project page: [https://arbablatif.github.io/projects/dsp-copilot/](https://arbablatif.github.io/projects/dsp-copilot/). More work at [arbablatif.github.io](https://arbablatif.github.io/).
