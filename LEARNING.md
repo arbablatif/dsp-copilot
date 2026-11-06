@@ -1,6 +1,5 @@
 # Learning notes: DSP Copilot
 
-Plain-language notes on how this project works and why it was built this way, so you can explain it to a client without reading the code.
 
 ## The one-minute explanation
 
